@@ -40,7 +40,7 @@
 <body>
 <nav class="nav">
     <span>尊贵的</span>
-    <p class="text-danger" style="margin-left: 10px">${name}</p>
+    <p class="text-danger" style="margin-left: 10px">${adminName}</p>
     <span class="text-muted" style="margin-left: 10px">欢迎登陆高端大气上档次，低调奢华有内涵的故障反馈后台管理页面！</span>
     <p style="margin-left: 10px"><a href="/fixSystem/admin/logout" onclick='return confirm("确定退出吗?");'>退出</a></p>
 </nav>

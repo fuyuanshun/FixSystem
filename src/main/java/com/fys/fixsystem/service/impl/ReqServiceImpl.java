@@ -23,6 +23,8 @@ public class ReqServiceImpl implements ReqService {
 
     @Override
     public void deal(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String floor = req.getParameter("floor");
@@ -80,7 +82,7 @@ public class ReqServiceImpl implements ReqService {
             return;
         }
 
-        req.getSession().setAttribute("name", name);
+        req.getSession().setAttribute("adminName", name);
         try {
             resp.getWriter().write("success");
         } catch (IOException e) {

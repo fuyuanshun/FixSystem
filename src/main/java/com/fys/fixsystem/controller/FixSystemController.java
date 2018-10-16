@@ -101,8 +101,8 @@ public class FixSystemController {
      */
     @RequestMapping("/admin/logout")
     public String logout(HttpServletRequest req, HttpServletResponse resp) {
-        if (null != req.getSession().getAttribute("name")) {
-            req.getSession().removeAttribute("name");
+        if (null != req.getSession().getAttribute("adminName")) {
+            req.getSession().removeAttribute("adminName");
         }
         return "admin/admin";
     }
