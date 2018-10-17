@@ -4,6 +4,7 @@ import com.fys.fixsystem.service.ReqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,8 +59,9 @@ public class FixSystemController {
      * 提交信息的处理
      */
     @RequestMapping("/deal")
-    public void deal(HttpServletRequest req, HttpServletResponse resp) {
-        reqService.deal(req, resp);
+    @ResponseBody
+    public String deal(HttpServletRequest req, HttpServletResponse resp) {
+        return reqService.deal(req, resp);
     }
 
     /**
@@ -92,8 +94,9 @@ public class FixSystemController {
      * 管理员登陆处理
      */
     @RequestMapping("/adeal")
-    public void aDeal(HttpServletRequest req, HttpServletResponse resp) {
-        reqService.aDeal(req, resp);
+    @ResponseBody
+    public String aDeal(HttpServletRequest req, HttpServletResponse resp) {
+        return reqService.aDeal(req, resp);
     }
 
     /**

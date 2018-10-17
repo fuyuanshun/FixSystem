@@ -7,10 +7,10 @@ $(function () {
             url : "/fixSystem/adeal",
             type : "POST",
             success : function(data){
-                if (data == "success") {
+                if (data === "success") {
                     $(window).attr("location", "/fixSystem/admin/Manager");
                 } else {
-                    alert("用户名或密码错误!");
+                    alert(data);
                 }
             },
             error : function () {

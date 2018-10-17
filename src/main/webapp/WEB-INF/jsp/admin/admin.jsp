@@ -1,4 +1,4 @@
-<%@page isELIgnored="false"%>
+<%@page isELIgnored="false" %>
 <%@   page contentType="text/html;charset=utf-8" %>
 <%@ page pageEncoding="utf-8" %>
 <%request.setCharacterEncoding("utf-8");%>
@@ -10,37 +10,21 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/admin/admin.js"></script>
 </head>
+<style>
+    .login-center {
+        height: 100vh;
+    }
+</style>
 <body>
-    <div class="container center-block">
-        <div>
-            <table  class="table table-hover">
-                <form action="/adeal" method="POST" id="loginForm">
-                <tr>
-                    <td>
-                        <span>管理员账号</span>
-                    </td>
-                    <td>
-                        <input type="text" name="name" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>管理员密码</span>
-                    </td>
-                    <td>
-                        <input type="text" name="password" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button type="button" id="button" class="btn btn-lg float-right btn-primary">登陆</button>
-                           <%--<input type="submit" id="button" class="btn btn-lg float-right btn-primary" value="登陆"/>--%>
-                    </td>
-                </tr>
-                </form>
-            </table>
-            <p class="text-danger">管理员账号：root 管理员密码：root</p>
-        </div>
+<div class="container">
+    <div class="row align-items-center justify-content-center login-center">
+        <form action="/adeal" method="POST" id="loginForm">
+            <h4 class="text-center">管理员登陆(默认账号密码root)</h4>
+            <input type="text" class="form-control" placeholder="管理员账号" id="name" name="name"/><br>
+            <input type="text" class="form-control" placeholder="管理员密码" id="password" name="password"/><br>
+            <button type="button" id="button" class="btn-success btn-block">登陆</button>
+        </form>
     </div>
+</div>
 </body>
 </html>

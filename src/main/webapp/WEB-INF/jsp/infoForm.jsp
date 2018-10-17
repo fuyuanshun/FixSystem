@@ -11,41 +11,27 @@
     <script src="${pageContext.request.contextPath}/js/jquery/jquery.validate.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/infoForm.js"></script>
 </head>
-
+<style>
+    .info-center{
+        height:100vh;
+    }
+</style>
 <body>
-<h2 class="text-center">报修系统表</h2>
-
-<div class="container center-block">
-    <table class="table table-hover">
+<div class="container">
+    <div class="info-center row align-items-center justify-content-center">
         <form action="" method="post" id="sendInfo">
+            <h4 class="text-center text-danger">报修系统表</h4>
             <input type="hidden" name="id" value="${id}">
-            <tr>
-                <td class="col-sm-1 text-center">您的姓名</td>
-                <td class="col-sm-5"><input class="form-control" type="text" name="name" value="${name}" readonly></td>
-            </tr>
-            <tr>
-                <td class="text-center">宿舍楼</td>
-                <td><input class="form-control" type="text" name="floor" value="${floor}" readonly></td>
-            </tr>
-            <tr>
-                <td class="text-center">寝室号</td>
-                <td><input class="form-control" type="text" name="room" value="${room}" readonly></td>
-            </tr>
-            <tr>
-                <td class="text-center">联系电话</td>
-                <td><input class="form-control" type="text"  name="phone" value="${phone}" readonly></td>
-            </tr>
-            <tr>
-                <td class="text-center">故障信息</td>
-                <td><textarea name="info" cols="30" rows="10" placeholder="请填写故障信息"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="5"><button type="button" class="float-right btn-primary btn btn-lg" data-toggle="modal" data-target="#myModal" id="button">提交信息</button></td>
-            </tr>
+            您的姓名:<input class="form-control" type="text" name="name" value="${name}" readonly>
+            宿舍楼:<input class="form-control" type="text" name="floor" value="${floor}" readonly>
+            寝室号<input class="form-control" type="text" name="room" value="${room}" readonly>
+            联系电话<input class="form-control" type="text"  name="phone" value="${phone}" readonly><br>
+            <span class="text-danger">故障信息</span><br>
+            <textarea name="info" cols="30" rows="10" placeholder="请填写故障信息"></textarea><br>
+            <button type="button" class="btn-primary btn-block" data-toggle="modal" data-target="#myModal" id="button">提交信息</button>
         </form>
-    </table>
+    </div>
 </div>
-
 <!-- 模态框 -->
 <div class="modal fade" id="myModal" data-backdrop="static">
     <div class="modal-dialog">

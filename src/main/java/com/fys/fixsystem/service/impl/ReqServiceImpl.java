@@ -9,6 +9,7 @@ import com.fys.fixsystem.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,9 +23,7 @@ public class ReqServiceImpl implements ReqService {
     private ReqDao reqDao;
 
     @Override
-    public void deal(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setHeader("content-type","text/html;charset=UTF-8");
-
+    public String deal(HttpServletRequest req, HttpServletResponse resp) {
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String floor = req.getParameter("floor");
@@ -38,55 +37,32 @@ public class ReqServiceImpl implements ReqService {
             boolean isPhone = CheckInfo.checkPhone(phone);
             //判断手机格式是否正确
             if (!isPhone) {
-                try {
-                    resp.getWriter().write("请按照要求扫描二维码,并且不要随意修改数据!");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return;
+                return "请按照要求扫描二维码,并且不要随意修改数据!";
             }
 
                 if (1 == reqDao.addInfo(new UInfo(name, floor, room, phone, info, createDate))) {
-                    try {
-                        resp.getWriter().write("提交成功!请等待维修部门与您取得联系!");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    boolean b = MailUtil.sendTo("有一个新用户提交了故障信息，请尽快查看处理.<a href='http://139.199.198.151:8080/admin/Manager'>去查看</a>", "fuyuanshun521@gmail.com");
+                    if (b) {
+                        return "提交成功!请等待维修部门与您取得联系!";
                     }
-                    MailUtil.sendTo("有一个新用户提交了故障信息，请尽快查看处理.<a href='http://localhost:8080/admin/Manager'>去查看</a>", "fuyuanshun521@gmail.com");
-                    return;
                 }
-                try {
-                    resp.getWriter().write("服务器内部好像出了点小问题~请稍后提交试试哦亲~");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                return "服务器内部好像出了点小问题~请稍后提交试试哦亲~";
+        } else if(info == null || "".equals(info)) {
+            return "请填写故障信息!";
         } else {
-            try {
-                resp.getWriter().write("请填写故障信息!");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return "请按照要求扫描二维码然后提交信息!";
         }
     }
 
     @Override
-    public void aDeal(HttpServletRequest req, HttpServletResponse resp) {
+    public String aDeal(HttpServletRequest req, HttpServletResponse resp) {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         if (null == reqDao.isExist(name, password)) {
-            try {
-                resp.getWriter().write("error");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return;
-        }
-
-        req.getSession().setAttribute("adminName", name);
-        try {
-            resp.getWriter().write("success");
-        } catch (IOException e) {
-            e.printStackTrace();
+            return "用户名或密码错误!";
+        } else {
+            req.getSession().setAttribute("adminName", name);
+            return "success";
         }
     }
 
